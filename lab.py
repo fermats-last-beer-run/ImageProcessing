@@ -142,9 +142,8 @@ def round_and_clip_image(image):
 
 
 def generate_kernel(size, f):
-    kernel = {'height':size, 'width':size, 'pixels': []}
-    for _ in range(0, size*size):
-        kernel['pixels'].append(f)
+    kernel = {'height':size, 'width':size, 
+              'pixels': [f for pixel in range(0, size*size)]}
     return kernel
 
 # FILTERS
