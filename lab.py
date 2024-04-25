@@ -201,16 +201,13 @@ def edges(image):
                             -1,0,1
                         ]}
     
-    result = {'height':image['height'], 'width':image['width'], 'pixels':
-              image['pixels'].copy()
-
-    }
+    result = {'height':image['height'], 'width':image['width'], 'pixels': [] }
     
     result_first = correlate(image, sobel_kernel_first, 'extend')
     result_second = correlate(image, sobel_kernel_second, 'extend')
 
-    for x in range(0, image['height']*image['width']):
-        result['pixels'][x] = math.sqrt((result_first['pixels'][x]**2) + (result_second['pixels'][x]**2))
+    for i, j in zip(result_first['pixels'], result_second['pixels']):
+        result['pixels'].append(math.sqrt((i**2) + (j**2)))
         
     result = round_and_clip_image(result)
     return result
